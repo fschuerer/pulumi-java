@@ -1,0 +1,9 @@
+{
+    "name": "Kubelogin",
+    "id": "kubelogin",
+    "version": "1.0.0",
+    "documentationURL": "",
+    "description": "",
+    "options": {
+    }
+}

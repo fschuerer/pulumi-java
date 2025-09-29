@@ -1,0 +1,67 @@
+{
+    "name": "Pulumi",
+    "image": "mcr.microsoft.com/devcontainers/java:21",
+    "mounts": [
+        "type=volume,source=devcontainer-pulumi-commandhistory,target=/commandhistory",
+        "type=bind,source=${env:HOME}/.m2,destination=/home/vscode/.m2",
+        "type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock",
+        "type=volume,source=dind-var-lib-docker,target=/var/lib/docker",
+        "type=bind,source=${env:HOME}/.kube,destination=/home/vscode/.kube"
+    ],
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "configureZshAsDefaultShell": true
+        },
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+        "ghcr.io/devcontainers/features/azure-cli:1": {},
+        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+            "version": "1.31.0",
+            "helm": "3.12.1",
+            "minikube": "latest"
+        },
+        "ghcr.io/devcontainers-extra/features/pulumi:1": {
+            "bashCompletion": false
+        },
+        "ghcr.io/devcontainers-extra/features/maven-sdkman:2": {
+            "jdkVersion": "none"
+        },
+        "ghcr.io/devcontainers-extra/features/gradle-sdkman:2": {
+            "jdkDistro": "none",
+            "jdkVersion": "none",
+            "version": "8.9"
+        },
+       "ghcr.io/devcontainers/features/go:1": {},
+        "./oh-my-zsh-plugins": {},
+        "./kubelogin": {}
+    },
+    "runArgs": [
+        "--network=host"
+    ], // Minikube ? 
+    "forwardPorts": [
+        // 1313,
+        // 2222,
+        // 6000,
+        // 7681,
+        // 8080
+    ],
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "ms-azuretools.vscode-docker",
+                "mhutchie.git-graph",
+                "ms-kubernetes-tools.vscode-kubernetes-tools",
+                "pulumi.pulumi-vscode-tools",
+                "YauhenYavorski.pulumi-snippets"
+            ],
+            "settings": {
+                "telemetry.enableTelemetry": "off",
+                "java.format.settings.url": "file:///home/duke/eclipse-java-google-style.xml",
+                "java.dependency.packagePresentation": "hierarchical",
+                "http.useLocalProxyConfiguration": false
+            }
+        }
+    },
+    "postCreateCommand": "pulumi gen-completion zsh > ~/.pulumi-completion.zsh && echo 'source ~/.pulumi-completion.zsh' >> ~/.zshrc"
+}
