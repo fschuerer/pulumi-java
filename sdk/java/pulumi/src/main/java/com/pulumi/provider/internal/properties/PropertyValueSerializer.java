@@ -86,7 +86,7 @@ public final class PropertyValueSerializer {
 
         switch (value.getType()) {
             case STRING:
-                if (rawType == String.class) {
+                if (rawType == String.class || rawType == Object.class) {
                     return value.getStringValue();
                 }
                 break;
@@ -107,8 +107,11 @@ public final class PropertyValueSerializer {
                     return rawType.getEnumConstants()[numberValue.intValue()];
                 }
                 break;
+                if (rawType == Object.class) {
+                    return numberValue;
+                }
             case BOOL:
-                if (rawType == Boolean.class || rawType == boolean.class) {
+                if (rawType == Boolean.class || rawType == boolean.class || rawType == Object.class) {
                     return value.getBooleanValue();
                 }
                 break;
